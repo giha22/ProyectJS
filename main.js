@@ -1,77 +1,123 @@
-//Gestor de turnos y ventas de productos de Estetica
-let continuar = true;
+// Función para mostrar el menú de turnos en el modal
+function mostrarTurnos() {
+    const modalTurnosBody = document.getElementById("modalTurnosBody");
+    modalTurnosBody.innerHTML = `
+        <select id="servicio">
+            <option value="1">Alisado definitivo</option>
+            <option value="2">Depilación</option>
+            <option value="3">Uñas esculpidas</option>
+            <option value="4">Limpieza facial completa</option>
+        </select>
+        <button id="btn-elegir-servicio">Elegir Servicio</button>
+    `;
+    document
+        .getElementById("btn-elegir-servicio")
+        .addEventListener("click", elegirServicio);
+}
 
-//Funcion para sacar un turno
+// Función para elegir un servicio
+function elegirServicio() {
+    const servicio = document.getElementById("servicio").value;
+    let diasDisponibles, horarioInicio, horarioFin;
+
+    switch (servicio) {
+        case "1":
+            diasDisponibles = ["lunes", "miércoles", "viernes"];
+            horarioInicio = 11;
+            horarioFin = 19;
+            break;
+        case "2":
+            diasDisponibles = ["martes", "jueves"];
+            horarioInicio = 10;
+            horarioFin = 18;
+            break;
+        case "3":
+            diasDisponibles = ["lunes", "martes", "miércoles", "jueves", "viernes"];
+            horarioInicio = 9;
+            horarioFin = 20;
+            break;
+        case "4":
+            diasDisponibles = ["lunes", "miércoles", "viernes"];
+            horarioInicio = 12;
+            horarioFin = 17;
+            break;
+        default:
+            alert("Opción de servicio no válida.");
+            return;
+    }
+
+    asignarTurno(servicio, diasDisponibles, horarioInicio, horarioFin);
+}
+
+// Función para asignar un turno
 function asignarTurno(servicio, diasDisponibles, horarioInicio, horarioFin) {
-    // Pedimos al usuario que elija un día
-    let dia = prompt(`Elige un día para tu turno de ${servicio} (${diasDisponibles.join(", ")}):`);
-    dia = dia.toLowerCase(); // Normalizamos el texto
-    // Validamos que el día sea válido
-    if (!diasDisponibles.includes(dia)) {
-        alert("El día ingresado no es válido. Por favor, elige un día disponible.");
-        return;
-    }
-    // Mostramos los horarios disponibles
-    let horariosDisponibles = [];
-    for (let hora = horarioInicio; hora < horarioFin; hora++) {
-        horariosDisponibles.push(`${hora}:00`);
-    }
-    let hora = prompt(`Elige una hora para tu turno de ${servicio} (Horarios disponibles: ${horariosDisponibles.join(", ")}):`);
-    hora = Number(hora);
-    if (isNaN(hora) || hora < horarioInicio || hora >= horarioFin) {
-        alert("La hora ingresada no es válida. Por favor, elige una hora dentro del horario disponible.");
-        return;
-    }
-    // Confirmamos el turno
-    alert(`Has reservado un turno para ${servicio} el ${dia} a las ${hora}:00. ¡Gracias, te esperamos en MyBella!`);
+    const modalTurnosBody = document.getElementById("modalTurnosBody");
+    modalTurnosBody.innerHTML = `
+        <p>Servicio: ${servicio}</p>
+        <select id="dia">
+            ${diasDisponibles.map(dia => `<option value="${dia}">${dia}</option>`).join("")}
+        </select>
+        <select id="hora">
+            ${Array.from({ length: horarioFin - horarioInicio }, (_, i) => horarioInicio + i)
+                .map(hora => `<option value="${hora}">${hora}:00</option>`)
+                .join("")}
+        </select>
+        <button id="btn-confirmar-turno">Confirmar Turno</button>
+    `;
+    document.getElementById("btn-confirmar-turno").addEventListener("click", () => confirmarTurno(servicio));
 }
 
-//Menu principal
-
-while (continuar) {
-    let seleccion = prompt(`Bienvenidos a MyBella estetica, elige una opción:
-        1 - Turnos y servicios 
-        2 - My Bella Shop 
-        3 - Finalizar`);
-
-    if (seleccion == 1) {
-        let servicio = prompt(`Elige un servicio:
-            1 - Alisado definitivo
-            2 - Depilación
-            3 - Uñas esculpidas
-            4 - Limpieza facial completa
-            5 - Salir de Turnos`);
-            // Definimos los días y horarios como parametros de la funcion según el servicio
-            if (servicio === "1") {
-                asignarTurno("Alisado definitivo", ["lunes", "miércoles", "viernes"], 11, 19);
-            } else if (servicio === "2") {
-                asignarTurno("Depilación", ["martes", "jueves"], 10, 18);
-            } else if (servicio === "3") {
-                asignarTurno("Uñas esculpidas", ["lunes", "martes", "miércoles", "jueves", "viernes"], 9, 20);
-            } else if (servicio === "4") {
-                asignarTurno("Limpieza facial completa", ["lunes", "miércoles", "viernes"], 12, 17);
-            } else {
-                alert("Opción de servicio no válida.");
-            }
-    } else if (seleccion == 2) {
-        prompt(
-            `Bienvenidos a MyBella Shop: Elige un producto para agregar al carrito:
-            1 - Crema hidratante - $6500
-            2 - Serum antiarrugas - $8000
-            3 - Mascarilla facial - $2800
-            4 - Kit de uñas - $3500`);
-
-        if (producto === "1" || producto === "2" || producto === "3" || producto === "4") {
-            let cantidad = prompt("Ingrese la cantidad que desea comprar:");
-            alert(`Has seleccionado el producto ${producto}. Cantidad: ${cantidad}.`);
-        } else {
-            alert("Opción de producto no válida.");
-        }
-    } else if (seleccion == 3) {
-        continuar = !confirm(
-            "Estas saliendo de MyBella Estetica, ¿Estas seguro de querer salir?"
-        );
-    } else {
-        prompt("El valor ingresado no es correcto, intente de nuevo");
-    }
+// Función para confirmar el turno
+function confirmarTurno(servicio) {
+    const dia = document.getElementById("dia").value;
+    const hora = document.getElementById("hora").value;
+    const modalTurnosBody = document.getElementById("modalTurnosBody");
+    modalTurnosBody.innerHTML = `
+        <p>Has reservado un turno para ${servicio} el ${dia} a las ${hora}:00. ¡Gracias, te esperamos en MyBella!</p>
+    `;
 }
+
+// Función para mostrar el menú de compras en el modal
+function mostrarShop() {
+    const modalShopBody = document.getElementById("modalShopBody");
+    modalShopBody.innerHTML = `
+        <select id="producto">
+            <option value="1">Crema hidratante - $6500</option>
+            <option value="2">Serum antiarrugas - $8000</option>
+            <option value="3">Mascarilla facial - $2800</option>
+            <option value="4">Kit de uñas - $3500</option>
+        </select>
+        <input type="number" id="cantidad" placeholder="Cantidad" min="1">
+        <button id="btn-agregar-carrito">Agregar al Carrito</button>
+    `;
+    document
+        .getElementById("btn-agregar-carrito")
+        .addEventListener("click", agregarAlCarrito);
+}
+
+// Función para agregar un producto al carrito
+function agregarAlCarrito() {
+    const producto = document.getElementById("producto").value;
+    const cantidad = document.getElementById("cantidad").value;
+    const modalShopBody = document.getElementById("modalShopBody");
+    modalShopBody.innerHTML = `
+        <p>Has seleccionado el producto ${producto}. Cantidad: ${cantidad}.</p>
+    `;
+}
+
+// Inicialización
+document.addEventListener("DOMContentLoaded", () => {
+    // Evento para abrir el modal de turnos
+    document
+        .querySelectorAll('[data-bs-target="#modalTurnos"]')
+        .forEach((element) => {
+            element.addEventListener("click", mostrarTurnos);
+        });
+
+    // Evento para abrir el modal de shop
+    document
+        .querySelectorAll('[data-bs-target="#modalShop"]')
+        .forEach((element) => {
+            element.addEventListener("click", mostrarShop);
+        });
+});

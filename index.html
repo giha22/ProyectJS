@@ -54,11 +54,46 @@
         <div class="pagInicio">
             <div class="paginaDos">
                 <img src="./img/logoTurnos.png" alt="logo turnos">
-                <p><a href="./pages/turnos.html">Sacar turno</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#modalTurnos">Sacar turno</a></p>
             </div>
             <div class="paginaDos">
                 <img src="./img/logoshop.png" alt="logo shop">
-                <p><a href="./pages/shop.html">MyBella Shop</a></p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#modalShop">MyBella Shop</a></p>
+            </div>
+        </div>
+        <!-- Modal para Turnos -->
+        <div class="modal fade" id="modalTurnos" tabindex="-1" aria-labelledby="modalTurnosLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTurnosLabel">Turnos y Servicios</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalTurnosBody">
+                        <!-- Contenido dinámico para turnos -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Shop -->
+        <div class="modal fade" id="modalShop" tabindex="-1" aria-labelledby="modalShopLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalShopLabel">MyBella Shop</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalShopBody">
+                        <!-- Contenido dinámico para shop -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -70,10 +105,10 @@
 
         </div>
     </footer>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="./main.js"></script> -->
+    <script src="./main.js"></script>
 </body>
 
 </html>
