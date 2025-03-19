@@ -3,10 +3,10 @@ function mostrarTurnos() {
     const modalTurnosBody = document.getElementById("modalTurnosBody");
     modalTurnosBody.innerHTML = `
         <select id="servicio">
-            <option value="1">Alisado definitivo</option>
-            <option value="2">Depilación</option>
-            <option value="3">Uñas esculpidas</option>
-            <option value="4">Limpieza facial completa</option>
+            <option value="Alisado definitivo">Alisado definitivo</option>
+            <option value="Depilación">Depilación</option>
+            <option value="Uñas esculpidas">Uñas esculpidas</option>
+            <option value="Limpieza facial completa">Limpieza facial completa</option>
         </select>
         <button id="btn-elegir-servicio">Elegir Servicio</button>
     `;
@@ -21,22 +21,22 @@ function elegirServicio() {
     let diasDisponibles, horarioInicio, horarioFin;
 
     switch (servicio) {
-        case "1":
+        case "Alisado definitivo":
             diasDisponibles = ["lunes", "miércoles", "viernes"];
             horarioInicio = 11;
             horarioFin = 19;
             break;
-        case "2":
+        case "Depilación":
             diasDisponibles = ["martes", "jueves"];
             horarioInicio = 10;
             horarioFin = 18;
             break;
-        case "3":
+        case "Uñas esculpidas":
             diasDisponibles = ["lunes", "martes", "miércoles", "jueves", "viernes"];
             horarioInicio = 9;
             horarioFin = 20;
             break;
-        case "4":
+        case "Limpieza facial completa":
             diasDisponibles = ["lunes", "miércoles", "viernes"];
             horarioInicio = 12;
             horarioFin = 17;
@@ -54,6 +54,8 @@ function asignarTurno(servicio, diasDisponibles, horarioInicio, horarioFin) {
     const modalTurnosBody = document.getElementById("modalTurnosBody");
     modalTurnosBody.innerHTML = `
         <p>Servicio: ${servicio}</p>
+        <label for="nombreCliente">Nombre:</label>
+        <input type="text" id="nombreCliente" placeholder="Ingrese su nombre" required>
         <select id="dia">
             ${diasDisponibles.map(dia => `<option value="${dia}">${dia}</option>`).join("")}
         </select>
@@ -69,12 +71,58 @@ function asignarTurno(servicio, diasDisponibles, horarioInicio, horarioFin) {
 
 // Función para confirmar el turno
 function confirmarTurno(servicio) {
+    const nombreCliente = document.getElementById("nombreCliente").value;
     const dia = document.getElementById("dia").value;
     const hora = document.getElementById("hora").value;
+
+    if (!nombreCliente) {
+        alert("Por favor, ingrese su nombre.");
+        return;
+    }
+
+    // Crear un objeto con los datos del turno
+    const turno = {
+        nombre: nombreCliente,
+        servicio: servicio,
+        dia: dia,
+        hora: `${hora}:00`
+    };
+
+    // Guardar en localStorage
+    guardarTurnoEnLocalStorage(turno);
+
+    // Mostrar mensaje de confirmación
     const modalTurnosBody = document.getElementById("modalTurnosBody");
     modalTurnosBody.innerHTML = `
-        <p>Has reservado un turno para ${servicio} el ${dia} a las ${hora}:00. ¡Gracias, te esperamos en MyBella!</p>
+        <p>¡Gracias, ${nombreCliente}!</p>
+        <p>Has reservado un turno para ${servicio} el ${dia} a las ${hora}:00.</p>
+        <p>Te esperamos en MyBella.</p>
     `;
+}
+
+// Función para guardar el turno en localStorage
+function guardarTurnoEnLocalStorage(turno) {
+    let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
+    turnos.push(turno);
+    localStorage.setItem("turnos", JSON.stringify(turnos));
+}
+
+//  Función para mostrar los turnos guardados
+
+function mostrarTurnosGuardados() {
+    const turnos = JSON.parse(localStorage.getItem("turnos")) || [];
+    if (turnos.length === 0) {
+        console.log("No hay turnos guardados.");
+        return;
+    }
+    console.log("Turnos guardados:");
+    turnos.forEach((turno, index) => {
+        console.log(`Turno ${index + 1}:`);
+        console.log(`- Nombre: ${turno.nombre}`);
+        console.log(`- Servicio: ${turno.servicio}`);
+        console.log(`- Día: ${turno.dia}`);
+        console.log(`- Hora: ${turno.hora}`);
+    });
 }
 
 // Función para mostrar el menú de compras en el modal

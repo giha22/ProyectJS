@@ -49,3 +49,40 @@
     font-weight: bold;
     text-decoration: none;
 }
+
+/* Estilos para el modal */
+.modal-content {
+    background-color: #f8f9fa; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.modal-header {
+    background-color: #fce4ec; 
+    color: black; 
+    border-top-left-radius: 15px; 
+    border-top-right-radius: 15px;
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 1rem;
+    gap: 10px;
+}
+
+.modal-footer .btn {
+    border-radius: 10px; 
+    padding: 8px 20px;
+    background-color: #fce4ec;
+    color: black;
+}
+
+.modal-header .btn-close {
+    filter: invert(1); 
+    background-color: #fce4ec;
+}
