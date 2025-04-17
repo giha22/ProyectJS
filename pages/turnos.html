@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img id="icono" src="../img/icono.png" alt="icono"></a>
+            <a class="navbar-brand" href="../index.html"><img id="icono" src="../img/icono.png" alt="icono"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Turnos</a>
+                        <a class="nav-link" href="./turnos.html">Turnos</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -33,12 +33,12 @@
                             Shop
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Cabello</a></li>
-                            <li><a class="dropdown-item" href="#">Piel</a></li>
+                            <li><a class="dropdown-item" href="./shop.html">Cabello</a></li>
+                            <li><a class="dropdown-item" href="./shop.html">Piel</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Electro</a></li>
+                            <li><a class="dropdown-item" href="./shop.html">Electro</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -51,21 +51,32 @@
     </nav>
     <main>
 
-        <h1 class="titulo">Turnos y Servicios</h1>
-        <div class="container">
-            <div class="output" id="output">
-                <!-- Aquí se mostrarán los mensajes y resultados -->
+        <h1 class="text-center mb-4">Reserva tu turno</h1>
+        
+        <div id="formularioTurno" class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <select id="servicio" class="form-select mb-3">
+                            <option value="Alisado definitivo">Alisado definitivo</option>
+                            <option value="Depilación">Depilación</option>
+                            <option value="Uñas esculpidas">Uñas esculpidas</option>
+                            <option value="Limpieza facial completa">Limpieza facial completa</option>
+                        </select>
+                        <button id="btn-elegir-servicio" class="btn btn-primary w-100">Elegir Servicio</button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div id="confirmacionTurno" class="text-center mt-4" style="display: none;">
         </div>
         
     </main>
     <footer>
 
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../main.js"></script>
 </body>
 
 </html>
