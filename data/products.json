@@ -1,0 +1,67 @@
+[
+    {
+    "id": 1,
+    "name": "Crema Hidratante",
+    "description": "Para piel seca • 50ml",
+    "price": 6000,
+    "originalPrice": 7500,
+    "discount": 20,
+    "image": "../img/crema-hidratante.jpg",
+    "category": "piel",
+    "stock": 10
+    },
+    {
+    "id": 2,
+    "name": "Serum Anti-age",
+    "description": "Reduce arrugas • 30ml",
+    "price": 8200,
+    "image": "../img/serum.webp",
+    "category": "piel",
+    "stock": 5
+    },
+    {
+    "id": 3,
+    "name": "Shampoo Reparador",
+    "description": "Cabello dañado • 250ml",
+    "price": 4500,
+    "image": "../img/shampoo.avif",
+    "category": "cabello",
+    "stock": 8
+    },
+    {
+    "id": 4,
+    "name": "Esponja Natural",
+    "description": "Exfoliante • 1 unidad",
+    "price": 2500,
+    "image": "../img/esponja-natural.jpg",
+    "category": "piel",
+    "stock": 25
+    },
+    {
+    "id": 5,
+    "name": "Crema exfoliante corporal",
+    "description": "Crema casera exfoliante • 500ml",
+    "price": 4500,
+    "image": "../img/exfoliante-corporal.jpg",
+    "category": "piel",
+    "stock": 5
+    },   
+    {
+    "id": 6,
+    "name": "Jabón en barra",
+    "description": "Jabón natural en barra • 1 unidad",
+    "price": 3000,
+    "image": "../img/jabon-natural.jpg",
+    "category": "piel",
+    "stock": 20
+    },
+    {
+    "id": 7,
+    "name": "Gel de baño",
+    "description": "Jabón en gel para ducha • 250ml",
+    "price": 6500,
+    "image": "../img/gel-baño.webp",
+    "category": "piel",
+    "stock": 20
+    }
+]
